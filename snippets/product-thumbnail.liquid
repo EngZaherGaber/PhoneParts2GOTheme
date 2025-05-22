@@ -24,7 +24,14 @@
     modal_id: section.id
   %}
 {% endcomment %}
-
+{%- style -%}
+  img{
+    mix-blend-mode: multiply;
+  }
+  .product-media-container{
+    border:0;
+  }
+{%- endstyle -%}
 {%- liquid
   unless lazy_load == false
     assign lazy = 'lazy'
