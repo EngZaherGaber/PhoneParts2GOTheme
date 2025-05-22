@@ -129,6 +129,12 @@
             transform: translateX(0%);
             fill: black;
         }
+  img{
+    mix-blend-mode: multiply;
+  }
+  .product-media-container{
+    border:0;
+  }
 {%- endstyle -%}
 {%- unless skip_styles -%}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
