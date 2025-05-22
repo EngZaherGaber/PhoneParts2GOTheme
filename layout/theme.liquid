@@ -63,6 +63,7 @@
           --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
         {% if scheme.settings.background_gradient != empty %}
           --gradient-background: {{ scheme.settings.background_gradient }};
+          --gradient-background1:linear-gradient(180deg, rgba(207, 234, 221, 1), rgba(255, 255, 255, 1) 0%, rgba(207, 234, 221, 1) 200%);
         {% else %}
           --gradient-background: {{ scheme.settings.background }};
         {% endif %}
