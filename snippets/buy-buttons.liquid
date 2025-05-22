@@ -10,6 +10,116 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
+{%- style -%}
+  .button {
+            position: relative;
+            width: 180px;
+            height: 60px;
+            border: 2px solid white;
+            background: transparent;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .fill {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            transition: bottom 1s ease-in-out;
+            z-index: 0;
+            border-radius: inherit;
+            overflow: hidden;
+        }
+
+        .button:hover .fill {
+            bottom: 0;
+        }
+
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            bottom: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: 0;
+            width: 10px;
+            height: 10px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+            animation: bubbleUp 3s infinite ease-in-out;
+        }
+
+        .bubble:nth-child(1) {
+            left: 20%;
+            animation-delay: 0.3s;
+        }
+
+        .bubble:nth-child(2) {
+            left: 40%;
+            width: 6px;
+            height: 6px;
+            animation-delay: 0.6s;
+        }
+
+        .bubble:nth-child(3) {
+            left: 60%;
+            animation-delay: 0.9s;
+        }
+
+        .bubble:nth-child(4) {
+            left: 80%;
+            width: 8px;
+            height: 8px;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes bubbleUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        .conBtn {
+            position: absolute;
+          justify-content: center;
+            align-items: center;
+            gap: 10px;
+            z-index: 2;
+            fill: transparent;
+            width: 100%;
+            transform: translateX(-400%);
+            transition: transform 2s ease-in-out, fill 0.6s ease-in-out;
+          display:flex;
+        }
+      .conBtn .icon{
+          width:28px;
+          height:28px;
+          }
+        .button:hover .conBtn {
+            transform: translateX(0%);
+            fill: black;
+        }
+{%- endstyle -%}
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
     {%- liquid
@@ -82,6 +192,25 @@
               disabled
             {% endif %}
           >
+          <div class="fill">
+                    <div class="bubbles">
+                      <div class="bubble"></div>
+                      <div class="bubble"></div>
+                      <div class="bubble"></div>
+                      <div class="bubble"></div>
+                    </div>
+                  </div>
+                  <div class="conBtn">
+                    <svg class="icon" viewBox="0 0 24 24">
+                      <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9
+                         2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9
+                         22 17 22s2-.9 2-2-.9-2-2-2zM7.16
+                         14l.84-2h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A.996.996
+                         0 0 0 20 3H5.21l-.94-2H1v2h2l3.6 7.59-1.35
+                         2.44C4.52 14.37 5.48 16 7 16h12v-2H7.16z" />
+                    </svg>
+                    <div class="text">Get IT!</div>
+                  </div>
             <span>
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
